@@ -34,6 +34,11 @@ public class CourseManager {
         if (title.isEmpty()) {
             throw new InvalidCourseException("Course title cannot be empty.");
         }
+        if (title.contains("|")) {
+            throw new InvalidCourseException(
+                    "Course title cannot contain the | character."
+            );
+        }
         int units;
         try {
             units = Integer.parseInt(rawUnits == null ? "" : rawUnits.trim());
@@ -95,9 +100,19 @@ public class CourseManager {
      * Base cases: end of list (-1 = not found) or a match (return index).
      */
     public int findIndexByCode(String code, int index) {
-        if (index >= courses.size()) return -1;                       // base case: not found
-        if (courses.get(index).getCode().equalsIgnoreCase(code.trim())) return index; // base case: found
-        return findIndexByCode(code, index + 1);                      // recursive call
+        String normalizedCode = code == null
+                ? ""
+                : code.trim().replaceAll("\\s+", "").toUpperCase();
+
+        if (index >= courses.size()) {
+            return -1;
+        }
+
+        if (courses.get(index).getCode().equals(normalizedCode)) {
+            return index;
+        }
+
+        return findIndexByCode(normalizedCode, index + 1);
     }
 
     public Course getCourse(int index) { return courses.get(index); }
