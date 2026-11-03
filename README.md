@@ -79,7 +79,18 @@ Enter course code: IFT211
 
 ## Input rules
 
-- **Course code:** 3 letters followed by 3 digits, for example `COS201`. Spaces and lowercase are cleaned up automatically, so `cos 201` becomes `COS201`.
+- ### Course Code Handling
+
+Course codes are converted to uppercase and spaces are removed
+when adding a course.
+
+For example:
+- `cos201` becomes `COS201`
+- `COS 201` becomes `COS201`
+- ` cos201 ` becomes `COS201`
+
+The search feature also accepts lowercase letters and spaces.
+For example, searching for `cos 201` will find `COS201`.
 - **Course title:** cannot be empty. It is trimmed and converted to Title Case.
 - **Credit units:** a whole number from 1 to 6.
 - **Duplicates:** a course code that already exists is rejected.
