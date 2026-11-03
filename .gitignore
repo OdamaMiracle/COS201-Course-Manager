@@ -1,0 +1,14 @@
+# Compiled Java files
+*.class
+
+# Logs and temp files
+*.log
+.~lock.*
+
+# VS Code and Java tooling
+.vscode/
+.classpath
+.project
+.settings/
+bin/
+out/
